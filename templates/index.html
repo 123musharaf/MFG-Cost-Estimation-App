@@ -1,0 +1,373 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Manufacturing Cost Estimation</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Manufacturing Cost Estimation</h1>
+    <form method="POST" action="/calculate">
+        
+        <label><span>Part Number:</span> <input type="text" name="part_number"></label>
+        <label><span>Project ID:</span> <input type="text" name="project_id"></label>
+        <label><span>Part desc:</span> <input type="text" name="part_desc"></label>
+        <label><span>Material:</span> 
+            <select name="material">
+                <option value="" selected></option>
+                <option value="MS">MS</option>
+                <option value="C45">C45</option>
+                <option value="EN24">EN24</option>
+                <option value="EN354">EN354</option>
+                <option value="20MnCr5">20MnCr5</option>
+                <option value="EN47">EN47</option>
+                <option value="EN31">EN31</option>
+                <option value="EN19">EN19</option>
+                <option value="SS410">SS410</option>
+                <option value="AL-7075">AL-7075</option>
+                <option value="D2">D2</option>
+                <option value="OHNS">OHNS</option>
+                <option value="DELRIN">DELRIN</option>
+                <option value="NYLON">NYLON</option>
+                <option value="HYLEM">HYLEM</option>
+                <option value="BRASS">BRASS</option>
+                <option value="COPPER">COPPER</option>
+                <option value="CARBIDE">CARBIDE</option>
+                <option value="CASTING">CASTING</option>
+                <option value="WELDMENTS">WELDMENTS</option>
+                <option value="AL-6061">AL-6061</option>
+                <option value="SS304">SS304</option>
+            </select>
+        </label>
+        <label><span>Type:</span> 
+            <select name="type">
+                <option value="" selected></option>
+                <option value="Cyl">Cylindrical</option>
+                <option value="Pri">Prismatic</option>
+                <option value="Str">Structural</option>
+            </select>
+        </label>
+        <label for="dia" class="hidden"><span>Diameter (Ø, mm):</span> <input type="number" step="0.1" name="dia"></label>
+        <label for="length" class="hidden"><span>Length (L, mm):</span> <input type="number" step="0.1" name="length"></label>
+        <label for="width" class="hidden"><span>Width (W, mm):</span> <input type="number" step="0.1" name="width"></label>
+        <label for="thickness" class="hidden"><span>Thickness (T, mm):</span> <input type="number" step="0.1" name="thickness"></label>
+
+        
+        <label><span>RMW_Calc:</span> <input type="number" step="0.01" name="rmw_calc"></label>
+        <label><span>FWCAM:</span> <input type="number" step="0.01" name="fwcam"></label>
+        <label for="rmw_str" class="hidden"><span>RMW_Str:</span> <input type="number" step="0.01" name="rmw_str"></label>
+        <label><span>RMW:</span> <input type="number" step="0.01" name="rmw"></label>
+        <label><span>RMC:</span> <input type="number" step="0.01" name="rmc"></label>
+        <label><span>Operation:</span> 
+            <select name="operation">
+                <option value="" selected></option>
+                <option value="Milling">Milling</option>
+                <option value="Drilling">Drilling</option>
+                <option value="Grinding">Grinding</option>
+                <option value="Heat Treatment">Heat Treatment</option>
+                <option value="Coating">Coating</option>
+                <option value="VMC">VMC</option>
+                <option value="Wire Cut">Wire Cut</option>
+                <option value="CG">CG</option>
+                <option value="Turning">Turning</option>
+                <option value="CNC Turning">CNC Turning</option>
+                <option value="JG">JG</option>
+                <option value="Sparking">Sparking</option>
+            </select>
+        </label>
+        <label><span>FM:</span> <input type="number" step="0.01" name="fm"></label>
+        <label><span>FM_side?:</span> 
+            <select name="fm_side">
+                <option value="" selected></option>
+                <option value="False">No</option>
+                <option value="True">Yes</option>
+            </select>
+        </label>
+        <label><span>FM_side:</span> <input type="number" step="0.01" name="fm_side_cost"></label>
+        <label><span>FM-L:</span> <input type="number" step="0.01" name="fm_l"></label>
+
+        
+        <label><span>Hole_4_8:</span> <input type="number" name="hole_4_8"></label>
+        <label><span>Hole_9_13:</span> <input type="number" name="hole_9_13"></label>
+        <label><span>Hole_15_22:</span> <input type="number" name="hole_15_22"></label>
+        <label><span>Free_hole_cost:</span> <input type="number" step="0.01" name="free_hole_cost"></label>
+        <label><span>Hole_M4:</span> <input type="number" name="hole_m4"></label>
+        <label><span>Hole_M5:</span> <input type="number" name="hole_m5"></label>
+        <label><span>Hole_M6:</span> <input type="number" name="hole_m6"></label>
+        <label><span>Hole_M8:</span> <input type="number" name="hole_m8"></label>
+        <label><span>Hole_M10:</span> <input type="number" name="hole_m10"></label>
+        <label><span>Hole_M12:</span> <input type="number" name="hole_m12"></label>
+        <label><span>Hole_M14:</span> <input type="number" name="hole_m14"></label>
+        <label><span>Hole_M16:</span> <input type="number" name="hole_m16"></label>
+        <label><span>Hole_M18:</span> <input type="number" name="hole_m18"></label>
+        <label><span>Hole_M20:</span> <input type="number" name="hole_m20"></label>
+        <label><span>Hole_M22:</span> <input type="number" name="hole_m22"></label>
+        <label><span>Hole_M24:</span> <input type="number" name="hole_m24"></label>
+        <label><span>Hole_M25:</span> <input type="number" name="hole_m25"></label>
+        <label><span>Hole_M26:</span> <input type="number" name="hole_m26"></label>
+        <label><span>Hole_M30:</span> <input type="number" name="hole_m30"></label>
+        <label><span>Hole_M36:</span> <input type="number" name="hole_m36"></label>
+        <label><span>Tap_hole_cost:</span> <input type="number" step="0.01" name="tap_hole_cost"></label>
+        <label><span>C_bore_M3_M5:</span> <input type="number" name="c_bore_m3_m5"></label>
+        <label><span>C_bore_M6_M10:</span> <input type="number" name="c_bore_m6_m10"></label>
+        <label><span>C_bore_M12:</span> <input type="number" name="c_bore_m12"></label>
+        <label><span>C_bore_M14:</span> <input type="number" name="c_bore_m14"></label>
+        <label><span>C_bore_M16:</span> <input type="number" name="c_bore_m16"></label>
+        <label><span>C_Bore_Cost:</span> <input type="number" step="0.01" name="c_bore_cost"></label>
+        <label><span>BSP_TAP_1/8_1/4:</span> <input type="number" name="bsp_tap_1_8_1_4"></label>
+        <label><span>BSP_TAP_1/2_3/8:</span> <input type="number" name="bsp_tap_1_2_3_8"></label>
+        <label><span>BSP_TAP_1_inch:</span> <input type="number" name="bsp_tap_1_inch"></label>
+        <label><span>BSP_TAP_1.5_2_inch:</span> <input type="number" name="bsp_tap_1_5_2_inch"></label>
+        <label><span>BSP_TAP_COST:</span> <input type="number" step="0.01" name="bsp_tap_cost"></label>
+        <label><span>GD_TOTAL_HOLE_LENGTH:</span> <input type="number" step="0.01" name="gd_total_hole_length"></label>
+        <label><span>GD_COST_GD_MACHINE:</span> <input type="number" step="0.01" name="gd_cost_gd_machine"></label>
+        <label><span>GD_TOTAL_HOLE_LENGTH_DRO_RADIAL DRILLING:</span> <input type="number" step="0.01" name="gd_total_hole_length_dro_radial_drilling"></label>
+        <label><span>GD_COST_DRO_RADIAL DRILLING:</span> <input type="number" step="0.01" name="gd_cost_dro_radial_drilling"></label>
+        <label><span>Spot_face:</span> <input type="number" name="spot_face"></label>
+
+        <label><span>HT_REQUIRED?:</span> 
+            <select name="ht_required">
+                <option value="" selected></option>
+                <option value="False">No</option>
+                <option value="True">Yes</option>
+            </select>
+        </label>
+        <label><span>HT:</span> <input type="number" step="0.01" name="ht"></label>
+        <label><span>4_5_H7:</span> <input type="number" name="4_5_h7"></label>
+        <label><span>6_8_H7:</span> <input type="number" name="6_8_h7"></label>
+        <label><span>10_14_H7:</span> <input type="number" name="10_14_h7"></label>
+        <label><span>15_18_H7:</span> <input type="number" name="15_18_h7"></label>
+        <label><span>20_25_H7:</span> <input type="number" name="20_25_h7"></label>
+        <label><span>25_30_H7:</span> <input type="number" name="25_30_h7"></label>
+
+        <label><span>H7_HOLE_COST:</span> <input type="number" step="0.01" name="h7_hole_cost"></label>
+        <label><span>SG:</span> <input type="number" step="0.01" name="sg"></label>
+        <label><span>SGL:</span> <input type="number" step="0.01" name="sgl"></label>
+        <label><span>VMC:</span> <input type="number" step="0.01" name="vmc"></label>
+        <label><span>Wire cut SP:</span> <input type="number" step="0.01" name="wire_cut_sp"></label>
+        <label><span>Wire cut DP:</span> <input type="number" step="0.01" name="wire_cut_dp"></label>
+        <label><span>Wire cut TP:</span> <input type="number" step="0.01" name="wire_cut_tp"></label>
+        <label><span>CG:</span> <input type="number" step="0.01" name="cg"></label>
+        <label><span>Turning:</span> <input type="number" step="0.01" name="turning"></label>
+        <label><span>CNC Turning:</span> <input type="number" step="0.01" name="cnc_turning"></label>
+        <label><span>JG:</span> <input type="number" step="0.01" name="jg"></label>
+        <label><span>Sparking:</span> <input type="number" step="0.01" name="sparking"></label>
+        <label><span>Coating:</span> 
+            <select name="coating_type">
+                <option value="" selected></option>
+                <option value="Blackening">Blackening</option>
+                <option value="ENP">ENP</option>
+                <option value="Flash Chrome">Flash Chrome</option>
+                <option value="PC">PC</option>
+                <option value="Zinc Blue">Zinc Blue</option>
+            </select>
+        </label>
+        <label><span>Blackening:</span> <input type="number" step="0.01" name="blackening"></label>
+        <label><span>ENP:</span> <input type="number" step="0.01" name="enp"></label>
+        <label><span>Flash Chrome:</span> <input type="number" step="0.01" name="flash_chrome"></label>
+        <label><span>PC:</span> <input type="number" step="0.01" name="pc"></label>
+        <label><span>Zinc Blue:</span> <input type="number" step="0.01" name="zinc_blue"></label>
+        <label><span>Engraving:</span> <input type="number" step="0.01" name="engraving"></label>
+
+        <label><span>Total:</span> <input type="number" step="0.01" name="total"></label>
+        <label><span>With Profit:</span> <input type="number" step="0.01" name="with_profit"></label>
+
+        <input type="submit" value="Calculate">
+    </form>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html> -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Manufacturing Cost Estimation</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Manufacturing Cost Estimation</h1>
+    <form method="POST" action="/calculate">
+        
+        <label><span>Part Number:</span> <input type="text" name="part_number"></label>
+        <label><span>Project ID:</span> <input type="text" name="project_id"></label>
+        <label><span>Part desc:</span> <input type="text" name="part_desc"></label>
+        <label><span>Material:</span> 
+            <select name="material">
+                <option value="" selected></option>
+                <option value="MS">MS</option>
+                <option value="C45">C45</option>
+                <option value="EN24">EN24</option>
+                <option value="EN354">EN354</option>
+                <option value="20MnCr5">20MnCr5</option>
+                <option value="EN47">EN47</option>
+                <option value="EN31">EN31</option>
+                <option value="EN19">EN19</option>
+                <option value="SS410">SS410</option>
+                <option value="AL-7075">AL-7075</option>
+                <option value="D2">D2</option>
+                <option value="OHNS">OHNS</option>
+                <option value="DELRIN">DELRIN</option>
+                <option value="NYLON">NYLON</option>
+                <option value="HYLEM">HYLEM</option>
+                <option value="BRASS">BRASS</option>
+                <option value="COPPER">COPPER</option>
+                <option value="CARBIDE">CARBIDE</option>
+                <option value="CASTING">CASTING</option>
+                <option value="WELDMENTS">WELDMENTS</option>
+                <option value="AL-6061">AL-6061</option>
+                <option value="SS304">SS304</option>
+            </select>
+        </label>
+        <label><span>Type:</span> 
+            <select name="type">
+                <option value="" selected></option>
+                <option value="Cyl">Cylindrical</option>
+                <option value="Pri">Prismatic</option>
+                <option value="Str">Structural</option>
+            </select>
+        </label>
+        <label for="dia" class="hidden"><span>Diameter (Ø, mm):</span> <input type="number" step="0.1" name="dia"></label>
+        <label for="length" class="hidden"><span>Length (L, mm):</span> <input type="number" step="0.1" name="length"></label>
+        <label for="width" class="hidden"><span>Width (W, mm):</span> <input type="number" step="0.1" name="width"></label>
+        <label for="thickness" class="hidden"><span>Thickness (T, mm):</span> <input type="number" step="0.1" name="thickness"></label>
+
+        
+        <label><span>RMW_Calc:</span> <input type="number" step="0.01" name="rmw_calc"></label>
+        <label><span>FWCAM:</span> <input type="number" step="0.01" name="fwcam"></label>
+        <label for="rmw_str" class="hidden"><span>RMW_Str:</span> <input type="number" step="0.01" name="rmw_str"></label>
+        <label><span>RMW:</span> <input type="number" step="0.01" name="rmw"></label>
+        <label><span>RMC:</span> <input type="number" step="0.01" name="rmc"></label>
+        <label><span>Operation:</span> 
+            <select name="operation">
+                <option value="" selected></option>
+                <option value="Milling">Milling</option>
+                <option value="Drilling">Drilling</option>
+                <option value="Grinding">Grinding</option>
+                <option value="Heat Treatment">Heat Treatment</option>
+                <option value="Coating">Coating</option>
+                <option value="VMC">VMC</option>
+                <option value="Wire Cut">Wire Cut</option>
+                <option value="CG">CG</option>
+                <option value="Turning">Turning</option>
+                <option value="CNC Turning">CNC Turning</option>
+                <option value="JG">JG</option>
+                <option value="Sparking">Sparking</option>
+            </select>
+        </label>
+        <label><span>FM:</span> <input type="number" step="0.01" name="fm"></label>
+        <label><span>FM_side?:</span> 
+            <select name="fm_side">
+                <option value="" selected></option>
+                <option value="False">No</option>
+                <option value="True">Yes</option>
+            </select>
+        </label>
+        <label><span>FM_side:</span> <input type="number" step="0.01" name="fm_side_cost"></label>
+        <label><span>FM-L:</span> <input type="number" step="0.01" name="fm_l"></label>
+
+        
+        <label><span>Hole_4_8:</span> <input type="number" name="hole_4_8"></label>
+        <label><span>Hole_9_13:</span> <input type="number" name="hole_9_13"></label>
+        <label><span>Hole_15_22:</span> <input type="number" name="hole_15_22"></label>
+        <label><span>Free_hole_cost:</span> <input type="number" step="0.01" name="free_hole_cost"></label>
+        <label><span>Hole_M4:</span> <input type="number" name="hole_m4"></label>
+        <label><span>Hole_M5:</span> <input type="number" name="hole_m5"></label>
+        <label><span>Hole_M6:</span> <input type="number" name="hole_m6"></label>
+        <label><span>Hole_M8:</span> <input type="number" name="hole_m8"></label>
+        <label><span>Hole_M10:</span> <input type="number" name="hole_m10"></label>
+        <label><span>Hole_M12:</span> <input type="number" name="hole_m12"></label>
+        <label><span>Hole_M14:</span> <input type="number" name="hole_m14"></label>
+        <label><span>Hole_M16:</span> <input type="number" name="hole_m16"></label>
+        <label><span>Hole_M18:</span> <input type="number" name="hole_m18"></label>
+        <label><span>Hole_M20:</span> <input type="number" name="hole_m20"></label>
+        <label><span>Hole_M22:</span> <input type="number" name="hole_m22"></label>
+        <label><span>Hole_M24:</span> <input type="number" name="hole_m24"></label>
+        <label><span>Hole_M25:</span> <input type="number" name="hole_m25"></label>
+        <label><span>Hole_M26:</span> <input type="number" name="hole_m26"></label>
+        <label><span>Hole_M30:</span> <input type="number" name="hole_m30"></label>
+        <label><span>Hole_M36:</span> <input type="number" name="hole_m36"></label>
+        <label><span>Tap_hole_cost:</span> <input type="number" step="0.01" name="tap_hole_cost"></label>
+        <label><span>C_bore_M3_M5:</span> <input type="number" name="c_bore_m3_m5"></label>
+        <label><span>C_bore_M6_M10:</span> <input type="number" name="c_bore_m6_m10"></label>
+        <label><span>C_bore_M12:</span> <input type="number" name="c_bore_m12"></label>
+        <label><span>C_bore_M14:</span> <input type="number" name="c_bore_m14"></label>
+        <label><span>C_bore_M16:</span> <input type="number" name="c_bore_m16"></label>
+        <label><span>C_Bore_Cost:</span> <input type="number" step="0.01" name="c_bore_cost"></label>
+        <label><span>BSP_TAP_1/8_1/4:</span> <input type="number" name="bsp_tap_1_8_1_4"></label>
+        <label><span>BSP_TAP_1/2_3/8:</span> <input type="number" name="bsp_tap_1_2_3_8"></label>
+        <label><span>BSP_TAP_1_inch:</span> <input type="number" name="bsp_tap_1_inch"></label>
+        <label><span>BSP_TAP_1.5_2_inch:</span> <input type="number" name="bsp_tap_1_5_2_inch"></label>
+        <label><span>BSP_TAP_COST:</span> <input type="number" step="0.01" name="bsp_tap_cost"></label>
+        <label><span>GD_TOTAL_HOLE_LENGTH:</span> <input type="number" step="0.01" name="gd_total_hole_length"></label>
+        <label><span>GD_COST_GD_MACHINE:</span> <input type="number" step="0.01" name="gd_cost_gd_machine"></label>
+        <label><span>GD_TOTAL_HOLE_LENGTH_DRO_RADIAL DRILLING:</span> <input type="number" step="0.01" name="gd_total_hole_length_dro_radial_drilling"></label>
+        <label><span>GD_COST_DRO_RADIAL DRILLING:</span> <input type="number" step="0.01" name="gd_cost_dro_radial_drilling"></label>
+        <label><span>Spot_face:</span> <input type="number" name="spot_face"></label>
+
+        <label><span>HT_REQUIRED?:</span> 
+            <select name="ht_required">
+                <option value="" selected></option>
+                <option value="False">No</option>
+                <option value="True">Yes</option>
+            </select>
+        </label>
+        <label><span>HT:</span> <input type="number" step="0.01" name="ht"></label>
+        <label><span>4_5_H7:</span> <input type="number" name="4_5_h7"></label>
+        <label><span>6_8_H7:</span> <input type="number" name="6_8_h7"></label>
+        <label><span>10_14_H7:</span> <input type="number" name="10_14_h7"></label>
+        <label><span>15_18_H7:</span> <input type="number" name="15_18_h7"></label>
+        <label><span>20_25_H7:</span> <input type="number" name="20_25_h7"></label>
+        <label><span>25_30_H7:</span> <input type="number" name="25_30_h7"></label>
+
+        <label><span>H7_HOLE_COST:</span> <input type="number" step="0.01" name="h7_hole_cost"></label>
+        <label><span>SG:</span> <input type="number" step="0.01" name="sg"></label>
+        <label><span>SGL:</span> <input type="number" step="0.01" name="sgl"></label>
+        <label><span>VMC:</span> <input type="number" step="0.01" name="vmc"></label>
+        <label><span>Wire cut SP:</span> <input type="number" step="0.01" name="wire_cut_sp"></label>
+        <label><span>Wire cut DP:</span> <input type="number" step="0.01" name="wire_cut_dp"></label>
+        <label><span>Wire cut TP:</span> <input type="number" step="0.01" name="wire_cut_tp"></label>
+        <label><span>CG:</span> <input type="number" step="0.01" name="cg"></label>
+        <label><span>Turning:</span> <input type="number" step="0.01" name="turning"></label>
+        <label><span>CNC Turning:</span> <input type="number" step="0.01" name="cnc_turning"></label>
+        <label><span>JG:</span> <input type="number" step="0.01" name="jg"></label>
+        <label><span>Sparking:</span> <input type="number" step="0.01" name="sparking"></label>
+        <label><span>Coating:</span> 
+            <select name="coating_type">
+                <option value="" selected></option>
+                <option value="Blackening">Blackening</option>
+                <option value="ENP">ENP</option>
+                <option value="Flash Chrome">Flash Chrome</option>
+                <option value="PC">PC</option>
+                <option value="Zinc Blue">Zinc Blue</option>
+            </select>
+        </label>
+        <label><span>Blackening:</span> <input type="number" step="0.01" name="blackening"></label>
+        <label><span>ENP:</span> <input type="number" step="0.01" name="enp"></label>
+        <label><span>Flash Chrome:</span> <input type="number" step="0.01" name="flash_chrome"></label>
+        <label><span>PC:</span> <input type="number" step="0.01" name="pc"></label>
+        <label><span>Zinc Blue:</span> <input type="number" step="0.01" name="zinc_blue"></label>
+        <label><span>Engraving:</span> <input type="number" step="0.01" name="engraving"></label>
+
+        <label><span>Total:</span> <input type="number" step="0.01" name="total"></label>
+        <label><span>Profit%:</span> <input type="number" step="0.01" name="profit_percent"></label>
+        <label><span>With Profit:</span> <input type="number" step="0.01" name="with_profit"></label>
+
+        <input type="submit" value="Calculate">
+    </form>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
