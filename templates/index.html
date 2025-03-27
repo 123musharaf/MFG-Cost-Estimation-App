@@ -744,8 +744,10 @@
 </head>
 <body>
     <div style="width: 100%; text-align: center; margin-top: 20px; margin-bottom: 20px;">
-        <label for="excelUpload" style="margin-left: 725px;"><mark>Upload Excel File:</mark></label>
-        <input type="file" id="excelUpload" accept=".xlsx, .xls" style="margin-bottom: 20px;">
+        <div style="display: inline-block; text-align: left;">
+            <label for="excelUpload"><mark>Upload Excel File:</mark></label>
+            <input type="file" id="excelUpload" accept=".xlsx, .xls" style="margin-bottom: 20px; display: block; margin: 5px auto 0 auto;">
+        </div>
     </div>
     <h1>Manufacturing Cost Estimation</h1>
     <form id="costForm" method="POST" action="/calculate">
