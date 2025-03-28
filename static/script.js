@@ -2017,7 +2017,7 @@ function calculateFields() {
     // Calculate Total
     const coatingSum = blackeningCost + enpCost + flashChromeCost + pcCost + zincBlueCost;
     const total = (
-        engraving + blackeningCost + sgl + h7HoleCost + ht + gdCostDroRadialDrilling + 
+        engraving + sgl + h7HoleCost + ht + gdCostDroRadialDrilling + 
         gdCostGdMachine + bspTapCost + cBoreCost + tapHoleCost + freeHoleCost + 
         fmL + fmSideCost + fm + rmc + vmc + turning + cg + wireCutSp + cncTurning + 
         coatingSum
