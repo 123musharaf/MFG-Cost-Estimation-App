@@ -211,8 +211,8 @@
     
     <div style="width: 100%; text-align: center; margin-top: 20px; margin-bottom: 20px;">
         <div style="display: inline-block; text-align: left;">
-            <label id="excel" for="excelUpload"><b>👇Upload Excel File(For storing estimations in desired sheet)👇</b></label>
-            <input id="excel" type="file" id="excelUpload" accept=".xlsx, .xls" style="margin-bottom: 20px; display: block; margin: 5px auto 0 auto;">
+            <label for="excelUpload"><b>👇Upload Excel File(For storing estimations in desired sheet)👇</b></label>
+            <input type="file" id="excelUpload" accept=".xlsx, .xls" style="margin-bottom: 20px; display: block; margin: 5px auto 0 auto;">
         </div>
     </div>
     
@@ -373,7 +373,7 @@
         <input type="button" id="saveButton" value="Save Estimation">
         <input type="button" id="downloadButton" value="Download Excel">
     </form>
-    <center id="excel"><p><b>© 2025 Insight Technologies. All rights reserved.</b></p></center>
+    <center><p><b>© 2025 Insight Technologies. All rights reserved.</b></p></center>
     <script src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js"></script>
     <script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>
