@@ -10373,12 +10373,12 @@ function calculateFields() {
             const h7_15_18 = parseFloat(document.querySelector('input[name="15_18_h7"]').value) || 0;
             const h7_20_25 = parseFloat(document.querySelector('input[name="20_25_h7"]').value) || 0;
             const h7_25_30 = parseFloat(document.querySelector('input[name="25_30_h7"]').value) || 0;
-            h7HoleCost = (h7_4_5 * drillingCosts["4_5_H7"].Cost) +
-                         (h7_6_8 * drillingCosts["6_8_H7"].Cost) +
-                         (h7_10_14 * drillingCosts["10_14_h7"].Cost) +
-                         (h7_15_18 * drillingCosts["15_18_H7"].Cost) +
-                         (h7_20_25 * drillingCosts["20_25_H7"].Cost) +
-                         (h7_25_30 * drillingCosts["25_30_H7"].Cost);
+            h7HoleCost = (h7_4_5 * 80) +
+                         (h7_6_8 * 100) +
+                         (h7_10_14 * 120) +
+                         (h7_15_18 * 160) +
+                         (h7_20_25 * 220) +
+                         (h7_25_30 * 280);
         }
     }
 
@@ -10414,7 +10414,7 @@ function calculateFields() {
         engraving + sgl + h7HoleCost + ht + gdCostDroRadialDrilling +
         gdCostGdMachine + bspTapCost + cBoreCost + tapHoleCost + freeHoleCost +
         spotFaceCost + fmL + fmSideCost + fm + rmc + vmc + turning + cg + wireCutSp +
-        cncTurning + jg + sparking + coatingSum + radialDrilling + gunDrilling + miscellaneous
+        cncTurning + jg + sparking + coatingSum + radialDrilling + gunDrilling + miscellaneous + sg
     );
 
     const withProfit = total * (1 + (profitPercent / 100));
